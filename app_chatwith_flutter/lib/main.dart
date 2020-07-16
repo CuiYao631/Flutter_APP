@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget{
             spTheme='MyTheme.dark';
           }
           return MaterialApp(
-            title: '测试程序',
+            title: '我的圈子',
             debugShowCheckedModeBanner: false,
             onGenerateRoute: onGenerateRoute,
             initialRoute: '/',

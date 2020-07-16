@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
   String validatePassword(value){
     if(value.isEmpty){
       return "密码不能为空";
-    }else if(value.trim().lenght<6||value.trim().lenght>18){
+    }else if(value.trim().length<6||value.trim().length>18){
       return "密码长度不正确";
     }
     return null;
