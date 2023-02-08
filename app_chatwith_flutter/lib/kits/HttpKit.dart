@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-String baseUrl="http://192.168.1.103:8090";
+String baseUrl="https://www.xcuitech.com";
 class HttpKit{
   static void post(String api,Map<String,dynamic> params,Function successCallback,Function errorCollback) async{
     http.Response res=await http.post(baseUrl+api,body: params);
@@ -15,6 +15,9 @@ class HttpKit{
           String data=result["data"];
           print(result["message"]);
           successCallback(data);//回调函数，返回数据
+          break;
+        case 400:
+          print('400');
           break;
         case 404:
           print('404');

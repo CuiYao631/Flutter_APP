@@ -1,6 +1,7 @@
 import 'package:appchatwithflutter/kits/HttpKit.dart';
 import 'package:appchatwithflutter/kits/Iconkit.dart';
 import 'package:appchatwithflutter/states/ThemeSatte.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:appchatwithflutter/kits/Colorkit.dart' as colorKit;
 import 'package:provider/provider.dart';
@@ -217,13 +218,14 @@ class MenuList extends StatelessWidget {
             child: GestureDetector(
               child:new InkWell(
                 onTap: (){
-                  HttpKit.post("/json", {}, (data) {
+                  HttpKit.post("", {"name":"","password":""}, (data) {
                     final snackbar = SnackBar(
                       content: Text("版本信息：" + data,style: Theme.of(context).textTheme.headline3),
                       backgroundColor: Theme.of(context).backgroundColor,
                       behavior: SnackBarBehavior.floating,
                     );
-                    Scaffold.of(context).showSnackBar(snackbar);
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                    //Scaffold.of(context).showSnackBar(snackbar);
                   }, (err) {
                    print("请求失败");
 

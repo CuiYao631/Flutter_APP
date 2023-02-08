@@ -32,11 +32,11 @@ class _TabpageState extends State<Tabpage> {
         },
         items: [
           //朋友圈分享
-          BottomNavigationBarItem(icon: Icon(Iconkit.share), title: Text('友圈')),
+          BottomNavigationBarItem(icon: Icon(Iconkit.share), label: '友圈'),
           //群聊
-          BottomNavigationBarItem(icon: Icon(Iconkit.home), title: Text('聊天')),
+          BottomNavigationBarItem(icon: Icon(Iconkit.home), label: '聊天'),
           //个人中心
-          BottomNavigationBarItem(icon: Icon(Iconkit.Person), title: Text('我的')),
+          BottomNavigationBarItem(icon: Icon(Iconkit.Person), label: '我的'),
         ],
       ),
     );

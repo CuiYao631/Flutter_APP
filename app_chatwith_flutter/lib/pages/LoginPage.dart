@@ -1,4 +1,4 @@
-
+import 'package:appchatwithflutter/kits/HttpKit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
               keyboardType:TextInputType.number,
               decoration: InputDecoration(
                 labelText: "用户名",
-                hintText: "请输入手机号",
+                hintText: "请输入用户名",
                 prefixIcon: Icon(Icons.person),
                 //尾部添加清除按钮
                 suffixIcon: (_isShowClear)?IconButton(
@@ -142,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                     :null
               ),
               //验证用户名
-              validator: validateUsername,
+              //validator: validateUsername,
               //保存数据
               onSaved: (String value){
                 _username=value;
@@ -167,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               obscureText: !_isShowClear,
               //密码验证
-              validator: validatePassword,
+              //validator: validatePassword,
               //保存数据
               onSaved: (String value){
                 _password=value;
@@ -182,11 +182,13 @@ class _LoginPageState extends State<LoginPage> {
     Widget loginButtonArea=new Container(
       margin: EdgeInsets.only(left: 50,right: 50),
       height: 45.0,
-      child: new RaisedButton(
-        color: Colors.blue[400],
+      child:  new ElevatedButton(
+        style:ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.blue[400]),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)))
+        ),
         child: Text("登录",style: TextStyle(fontSize: 25.0),),
         //设置按钮圆角
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         onPressed: (){
           //点击登录按钮，解除焦点，回收键盘
           _focusNodePassWord.unfocus();
@@ -194,9 +196,23 @@ class _LoginPageState extends State<LoginPage> {
           if(_formKey.currentState.validate()){
             //只有输入通过验证才会执行这里
             _formKey.currentState.save();
-            //todo 登录操作
-             print("$_username+$_password");
+            HttpKit.post("/user/login", {"name":"admin","password":"admin11"}, (data) {
+
+              Navigator.pushNamed(context, "/",arguments: data);
+
+              // final snackbar = SnackBar(
+              //  // content: Text("版本信息：" + data,style: Theme.of(context).textTheme.headline3),
+              //   backgroundColor: Theme.of(context).backgroundColor,
+              //   behavior: SnackBarBehavior.floating,
+              // );
+              // ScaffoldMessenger.of(context).showSnackBar(snackbar);
+              //
+              // //Scaffold.of(context).showSnackBar(snackbar);
+            }, (err) {
+              print("请求失败");
+            });
           }
+
         },
       ),
     );
@@ -266,14 +282,15 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          FlatButton(
+
+          TextButton(
             child: Text("忘记密码？",style: TextStyle(color: Colors.blue[400],fontSize: 16.0),),
             //忘记密码按钮，点击执行事件
             onPressed: (){
 
             },
           ),
-          FlatButton(
+          TextButton(
             child: Text("快速注册",style: TextStyle(color: Colors.blue[400],fontSize: 16.0),),
             //点击快速注册，执行事件
             onPressed: (){
